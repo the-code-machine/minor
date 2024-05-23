@@ -8,7 +8,7 @@ dotenv.config();
 const emailsecret = process.env.EMAIL_SECRET;
 const passwordsecret = process.env.PASSWORD_SECRET;
 
-function sendOTPEmail(email, otp) {
+async function  sendOTPEmail(email, otp) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -23,14 +23,19 @@ function sendOTPEmail(email, otp) {
     subject: 'OTP for Verification',
     html: generateOTPEmailTemplate(otp), // Use the HTML template with the OTP
   };
+  await new Promise((resolve, reject) => {
+    // send mail
+    transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+            console.error(err);
+            reject(err);
+        } else {
+            console.log(info);
+            resolve(info);
+        }
+    });
+});
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending OTP email:', error);
-    } else {
-      console.log('Email sent:', info.response);
-    }
-  });
 }
 
 export const genrateotp = async (email) => {
