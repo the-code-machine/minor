@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 
 connectDb();
 export async function POST(request) {
-  const reqBody = await request.json();
-  const {email} = reqBody;
+  const reqBod = await request.json();
+  const {email} = reqBod;
   try {
     const res = await genrateotp(email);
     return NextResponse.json({ message: res });
