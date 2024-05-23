@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "DRS",
-  description: "Automatic Data Recovery System",
+  description: "Automatic Detection Remote System",
 };
 
 export default function RootLayout({ children }) {
