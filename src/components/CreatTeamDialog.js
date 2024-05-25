@@ -1,9 +1,9 @@
-
+'use client'
 import { useEffect, useState } from "react";
 
 
 
-export default ({open,setOpen,URLLink}) => {
+export const CreatTeamDialog= ({open,setOpen,URLLink}) => {
   const [copyState, setCopyState] = useState(false);
   const handleCopy = () => {
     navigator.clipboard.writeText(URLLink).then(
