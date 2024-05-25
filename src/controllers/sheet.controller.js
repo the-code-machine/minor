@@ -1,10 +1,8 @@
 const { MentorStudentExaminer ,StudentExaminer} = require('../models/sheet.model'); // Your model function
 
-const saveSheetDataMentor = async (req, res) => {
-  const { sheetName, editedCell, newValue, allData } = req.body;
-
-  if (!sheetName || !allData) {
-    return res.status(400).json({ error: 'Sheet name and data are required' });
+const saveSheetDataMentor = async (sheetName, editedCell, newValue, allData) => {
+ if (!sheetName || !allData) {
+    return { error: 'Sheet name and data are required' ,status:400}
   }
 
   try {
@@ -15,7 +13,7 @@ const saveSheetDataMentor = async (req, res) => {
     const headerIndex = allData[0].indexOf(uniqueKey);
 
     if (headerIndex === -1) {
-      return res.status(400).json({ error: 'Unique key not found in headers' });
+      return { error: 'Unique key not found in headers' ,status:400}
     }
 
     // Loop through the data and insert or update documents
@@ -36,17 +34,16 @@ const saveSheetDataMentor = async (req, res) => {
       );
     }
 
-    return res.status(200).json({ message: 'Data updated successfully' });
+    return { message: 'Data updated successfully' ,status:201}
   } catch (error) {
     console.error('Error updating sheet data:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    return { error: 'Internal Server Error' ,status:500}
   }
 };
-const saveSheetDataExaminer = async (req, res) => {
-  const { sheetName, editedCell, newValue, allData } = req.body;
+const saveSheetDataExaminer = async (sheetName, editedCell, newValue, allData) => {
 
   if (!sheetName || !allData) {
-    return res.status(400).json({ error: 'Sheet name and data are required' });
+    return { error: 'Sheet name and data are required' ,status:400}
   }
 
   try {
@@ -57,7 +54,7 @@ const saveSheetDataExaminer = async (req, res) => {
     const headerIndex = allData[0].indexOf(uniqueKey);
 
     if (headerIndex === -1) {
-      return res.status(400).json({ error: 'Unique key not found in headers' });
+      return { error: 'Unique key not found in headers' ,status:400}
     }
 
     // Loop through the data and insert or update documents
@@ -78,11 +75,11 @@ const saveSheetDataExaminer = async (req, res) => {
       );
     }
 
-    return res.status(200).json({ message: 'Data updated successfully' });
+    return { message: 'Data updated successfully' ,status:201}
   } catch (error) {
     console.error('Error updating sheet data:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    return { error: 'Internal Server Error' ,status:500}
   }
 };
 
-module.exports = { saveSheetDataMentor ,saveSheetDataExaminer};
+export  { saveSheetDataMentor ,saveSheetDataExaminer};
