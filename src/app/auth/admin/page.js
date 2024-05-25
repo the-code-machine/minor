@@ -1,83 +1,76 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import SelectGroupOne from '@/components/Forms/SelectGroup/SelectGroupOne';
 import Loader from '@/common/Loader';
-import toast from 'react-hot-toast';
-import useAuth from '@/redux/common/useAuth';
-import { useDispatch } from 'react-redux';
-const SignIn= () => {
-  const dispatch = useDispatch();
-  const navigate = useRouter();
+import { useDispatch, useSelector } from 'react-redux';
 
+
+const AdminLogin= () => {
+  const user = useSelector(state=>state);
+  const navigate=useRouter();
+  const dispatch= useDispatch();
+  const selectedOption ='admin';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
-  const [loader, setLoading] = useState(false);
+  const[loader,showLoader]=useState(false);
 
-  const validateInputs = () => {
-    if (!email || !password || !selectedOption) {
+  const DetailsValidation = () => {
+    if (email === '' || password === '' ) {
       toast.error('Please fill all the details');
+      console.log(email,password)
       return false;
     }
-
-    if (!email.includes('@') || !email.includes('@satiengg.in')) {
-      toast.error('Please enter a valid email!');
+    else if(email.includes('@')===false || email.includes('@satiengg.in')===false){
+      toast.error('Please enter valid email!!');
       return false;
-    }
 
-    return true;
+    }
+    else {
+      return true;
+    }
   };
-
-  const Login = (e) => {
+  const Login =(e)=>{
     e.preventDefault();
-
-    if (!validateInputs()) {
+    if (!DetailsValidation()) {
       return;
     }
-
-    setLoading(true);
-
-    const url = `/api/auth/login`;
+    showLoader(true);
+    const url = `api/auth/admin`;
 
     fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password,selectedOption }),
+      body: JSON.stringify({ email, password ,selectedOption}),
     })
       .then((response) => response.json())
       .then((data) => {
-        setLoading(false);
-
-        if (data.status === 201) {
-          toast.success('Login Successful');
-
-          const user = {
-            token: data.token,
-            userId: email,
-            userType: selectedOption,
-          };
-
-        //   dispatch(setUser(user));
-
-          // Navigate to the root route or dashboard after successful login
-          navigate.push('/');
-        } else {
-          toast.error(data.error || 'Login failed');
+        if (data.status === 200) {
+          showLoader(false);
+          toast.success("Login Successfull");
+          const usern = {userType:selectedOption,userId:email,token:data.token}
+        //  dispatch(setUser(usern))
+          setPassword('');  
           setEmail('');
+         
+          navigate.push('/dashboard');
+      
+         
+        } else {
+          toast.error(data.error);
+          showLoader(false);
           setPassword('');
-          setSelectedOption('');
+          setEmail('');
+         
         }
       })
       .catch((error) => {
-        setLoading(false);
-        toast.error(error.message || 'An error occurred');
+        toast.error(error);
+        showLoader(false);
       });
-  };
-
+  }
   return (
 <>
 
@@ -226,12 +219,11 @@ const SignIn= () => {
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium">Minor Project</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign In to Cognito
+                Admin Panel
               </h2>
 
               <form>
               <div className="mb-4">
-                 <SelectGroupOne selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
                 </div>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
@@ -268,7 +260,7 @@ const SignIn= () => {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Re-type Password
+                    Admin Password
                   </label>
                   <div className="relative">
                     <input
@@ -312,7 +304,6 @@ const SignIn= () => {
                 </div>
 
           
-
                 <div className="mt-6 text-center">
                   <p>
                     Don’t have any account?{' '}
@@ -320,23 +311,20 @@ const SignIn= () => {
                       Sign Up
                     </Link>
                   </p>
-                  <p>
-                    {' '}
-                    <Link href="/auth/admin" className="text-[#1DBF73]">
-                      Admin Login?
-                    </Link>
-                  </p>
+               
                 </div>
+
+               
               </form>
             </div>
           </div>
         </div>
 
-        
+      
         { loader &&<Loader/>}
       </div>
       </>
   );
 };
 
-export default SignIn;
+export default AdminLogin;

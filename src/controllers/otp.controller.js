@@ -70,8 +70,8 @@ function generateNumericOTP(length) {
 
   return otp;
 }
-export const verifyotp = async (req, res) => {
-  const { otp } = req.body;
+export const verifyotp = async (otp) => {
+
 
   try {
     const otpRecord = await otpModel.findOne({ otp });
@@ -83,10 +83,10 @@ export const verifyotp = async (req, res) => {
     // Delete the OTP after successful verification
     await otpModel.deleteOne({ otp });
 
-    res.json({ message: 'OTP verification successful' });
+    return  'OTP verification successful'
   } catch (error) {
     console.error('Error querying the database:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    return  'Internal server error';
   }
 };
 

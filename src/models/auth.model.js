@@ -39,14 +39,9 @@ userSchema.methods.checkPassword = async function (password) {
 };
 
 // Create models for different user types
-const Student = mongoose.model('Student', userSchema);
-const Mentor = mongoose.model('Mentor', userSchema);
-const Examiner = mongoose.model('Examiner', userSchema);
-const Admin = mongoose.model('Admin', userSchema);
+const Student = mongoose.models.Student || mongoose.model('Students', userSchema);
+const Mentor = mongoose.models.Mentors|| mongoose.model('Mentors', userSchema);
+const Examiner = mongoose.models.Examiners|| mongoose.model('Examiners', userSchema);
+const Admin = mongoose.models.Admins ||mongoose.model('Admins', userSchema);
 
-module.exports = {
-  Student,
-  Mentor,
-  Examiner,
-  Admin
-};
+export { Student, Mentor, Examiner, Admin };

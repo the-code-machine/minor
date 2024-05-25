@@ -38,10 +38,10 @@ const signupUser = async (UserModel, email, password, userType) => {
     const newUser = new UserModel({ email, password, userType });
     await newUser.save(); // Save the new user to MongoDB
 
-    return { message: 'User signed up successfully', status: 201 }; // Created
+    return  'User signed up successfully'
   } catch (error) {
     console.error('Error during signup:', error);
-    return { error: error.message, status: 500 }; // Internal server error
+    return error.message
   }
 };
 
@@ -59,13 +59,10 @@ const loginUser = async (Model, email, password) => {
     const token = jwtModel.generateToken(email)
    
 
-    return { token, status: 200 };
+    return {token:token,status:201}
   } catch (error) {
     return { error: error.message, status: 500 }; // Internal server error
   }
 };
 
-module.exports = {
-  signupUser,
-  loginUser,
-};
+export { signupUser, loginUser}

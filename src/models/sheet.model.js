@@ -10,10 +10,10 @@ const sheetDataSchema = new mongoose.Schema({
 
 
 
-const MentorStudentExaminer = mongoose.model('Mentor-Student-Examiner', sheetDataSchema);
-const StudentExaminer = mongoose.model('Student-Examiner', sheetDataSchema);
+const MentorStudentExaminer = mongoose.models.MentorStudentExaminer || mongoose.model('MentorStudentExaminer', sheetDataSchema);
+const StudentExaminer = mongoose.models.StudentExaminer || mongoose.model('StudentExaminer', sheetDataSchema);
+
+export { MentorStudentExaminer, StudentExaminer };
 
 
-
-  module.exports = { MentorStudentExaminer,StudentExaminer};
   
