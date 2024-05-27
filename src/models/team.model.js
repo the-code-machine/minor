@@ -10,11 +10,11 @@ const teamSchema = new Schema({
   },
   leaderName: {
     type: String,
-    required: true, // Ensure leader name is provided
+  
   },
   leaderId: {
     type: String,
-    required: true, // Leader should have an ID
+
   },
   mentorId: {
     type: String, // Optional ID for the mentor
@@ -44,9 +44,13 @@ const teamSchema = new Schema({
     type: Map, // Using a map for flexible key-value pairs
     of: String, // Permissions can be set for each member
   },
+  teamConfirmed: {
+    type: Boolean, // Flag to indicate if the team is confirmed
+    default: false,
+  },
 }, { timestamps: true }); // Add timestamps for tracking creation and modification
 
 // Create the team model
-const Teams = mongoose.model('Team', teamSchema);
+const Teams = mongoose.models.Team || mongoose.model('Team', teamSchema);
 
-module.exports = Teams;
+export {Teams};

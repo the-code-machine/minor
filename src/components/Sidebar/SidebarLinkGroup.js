@@ -1,6 +1,6 @@
-import { ReactNode, useState } from 'react';
+'use client'
 
-
+import {  useState } from 'react';
 
 const SidebarLinkGroup = ({
   children,

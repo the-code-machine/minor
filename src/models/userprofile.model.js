@@ -8,10 +8,6 @@ const userProfileSchema = new Schema({
     required: true,
     unique: true, // Ensures emails are unique
   },
-  fullName: {
-    type: String,
-    
-  },
   linkedinUrl: {
     type: String,
   },
@@ -45,9 +41,13 @@ const userProfileSchema = new Schema({
   examinerId: {
     type: String, // URL or file reference
   },
+  teamConfirmed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // Create the model
-const UserProfile = mongoose.model('UserProfile', userProfileSchema);
+const UserProfile = mongoose.models.UserProfile|| mongoose.model('UserProfile', userProfileSchema);
 
-module.exports = UserProfile;
+export{ UserProfile};

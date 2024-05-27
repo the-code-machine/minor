@@ -1,17 +1,14 @@
-const UserProfile = require('../models/userprofile.model');
+import { UserProfile } from "@/models/userprofile.model";
 
 // Update or create user profile information based on email (userId)
-const updateUserProfile = async (req, res) => {
-  const { userId } = req.params; // This is email in your context
-  const { fullName, linkedinUrl, twitterUrl, githubUrl, bio, profileImage, coverImage ,userType,mentorId,projectId,examinerId,teamId} = req.body;
+const updateUserProfile = async (userId, linkedinUrl, twitterUrl, githubUrl, bio, profileImage, coverImage ,userType,mentorId,projectId,examinerId,teamId,teamConfirmed) => {
+ 
 
   try {
     // Find the user profile by email (userId)
     let userProfile = await UserProfile.findOne({ userId });
 
     if (userProfile) {
-      // Update existing profile
-      userProfile.fullName = fullName || userProfile.fullName;
       userProfile.linkedinUrl = linkedinUrl || userProfile.linkedinUrl;
       userProfile.twitterUrl = twitterUrl || userProfile.twitterUrl;
       userProfile.githubUrl = githubUrl || userProfile.githubUrl;
@@ -23,15 +20,15 @@ const updateUserProfile = async (req, res) => {
       userProfile.teamId = teamId || userProfile.teamId;
       userProfile.examinerId = examinerId || userProfile.examinerId;
       userProfile.coverImage = coverImage || userProfile.coverImage;
+      userProfile.teamConfirmed = teamConfirmed || userProfile.teamConfirmed;
       
 
       await userProfile.save();
-      return res.status(200).json({ message: 'User profile updated successfully' });
+      return { message: 'User profile updated successfully' ,status:201};
     } else {
       // Create new profile if none exists
      const userProfileNew = new UserProfile({
         userId, // Email
-        fullName,
         linkedinUrl,
         twitterUrl,
         githubUrl,
@@ -46,26 +43,24 @@ const updateUserProfile = async (req, res) => {
       });
 
       await userProfileNew.save();
-      return res.status(201).json({ message: 'User profile created successfully' });
+      return { message: 'User profile created successfully' ,status:201};
     }
   } catch (error) {
     console.error('Error updating user profile:', error);
-    return res.status(500).json({ message: 'Internal server error' });
+    return { message: 'Internal server error' ,status:500};
   }
 };
 
-const sendUserProfile = async (req, res) => {
+const sendUserProfile = async (userId) => {
     try {
-      const { userId } = req.params;
   
       const userProfile = await UserProfile.findOne({ userId });
   
       if (!userProfile) {
-        return res.status(404).json({ message: 'User profile not found' });
+        return { message: 'User profile not found' ,status:404};
       }
   
-      return res.status(200).json({
-        fullName: userProfile.fullName,
+      const data ={
         userType: userProfile.userType,
         mentorId: userProfile.mentorId,
         teamId: userProfile.teamId,
@@ -77,13 +72,13 @@ const sendUserProfile = async (req, res) => {
         bio: userProfile.bio,
         profileImage: userProfile.profileImage,
         coverImage: userProfile.coverImage,
-      });
+      }
+      return {
+         data:data,status:201
+      };
     } catch (error) {
       console.error('Error fetching user profile:', error);
-      return res.status(500).json({ message: 'Internal server error' });
+      return { message: 'Internal server error' ,status:500};
     }}
 
-
-module.exports = {
-  updateUserProfile, sendUserProfile
-};
+export { updateUserProfile,sendUserProfile}

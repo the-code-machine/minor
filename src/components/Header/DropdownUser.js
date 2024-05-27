@@ -1,23 +1,22 @@
+'use client'
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate} from 'react-router-dom';
-import { logout, setUser } from '../../redux/actions';
-import { toast } from 'react-toastify';
-const DropdownUser = () => {
-  const user = useSelector((state) => state); 
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { logout } from '@/redux/common/authSlicer';
+import toast from 'react-hot-toast';
+const DropdownUser = ({user}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [name, setName] = useState( user.fullName ||user.userId.split(/\d/)[0] );
   const trigger = useRef(null);
   const dropdown = useRef(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const handlelogout = () => {  
      
     dispatch(logout());
-    dispatch(setUser({})) // Dispatch the Redux logout action
     toast.success('Logout')
-    navigate('/auth/signin'); // Redirect to the sign-in page
+    navigate.push('/auth/login'); // Redirect to the sign-in page
   };
 
   useEffect(() => {
@@ -49,17 +48,17 @@ const DropdownUser = () => {
         ref={trigger}
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className="flex items-center gap-4"
-        to="#"
+        href="#"
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            {name || 'User name'}
+            {user?.userId?.split('2')[0] || 'User name'}
           </span>
-          <span className="block text-xs">{user.userType || 'User'}</span>
+          <span className="block text-xs">{user?.userType || 'User'}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          <img className=' rounded-full h-full w-full' src={user.profileImage|| "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg"} alt="User" />
+          <img className=' rounded-full h-full w-full' src={user?.profileImage|| "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg"} alt="User" />
         </span>
 
         <svg
@@ -89,7 +88,7 @@ const DropdownUser = () => {
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
           <li>
             <Link
-              to="/profile"
+              href="/profile"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-black lg:text-base"
             >
               <svg
@@ -115,7 +114,7 @@ const DropdownUser = () => {
        
           <li>
             <Link
-              to="/settings"
+              href="/settings"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-black lg:text-base"
             >
               <svg

@@ -1,7 +1,6 @@
-'use client'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { login, logout } from './authSlicer';
+import { login, logout, update } from './authSlicer';
 
 const useAuth = () => {
   const dispatch = useDispatch();
@@ -9,14 +8,17 @@ const useAuth = () => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      dispatch(login(JSON.parse(storedUser)));
+    if (storedUser && storedUser !== 'undefined') {
+      const parsedUser = JSON.parse(storedUser);
+      if (parsedUser) {
+        dispatch(login(parsedUser));
+      }
     }
   }, [dispatch]);
 
   useEffect(() => {
     if (authState.isLoggedIn) {
-      localStorage.setItem('user', JSON.stringify(authState.user));
+      localStorage.setItem('user', JSON.stringify(authState));
     } else {
       localStorage.removeItem('user');
     }

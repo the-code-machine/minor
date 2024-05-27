@@ -1,50 +1,20 @@
-import React, {useEffect, useRef, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+'use client'
+import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import SidebarLinkGroup from './SidebarLinkGroup';
-import { useSelector } from 'react-redux';
 
 
+const Sidebar = ({ sidebarOpen, setSidebarOpen, user, paths }) => {
+  const [pathname, setPathname] = useState(paths.main[0].link);
 
-
-const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  const user = useSelector((state) => state);
-  const location = useLocation();
-  const { pathname } = location;
-  const [paths, setPaths] = useState({ links: [], title: [] });
-
-  useEffect(() => {
-    if (user.userType === 'admin') {
-      setPaths({
-        links: ['/', '/dashboard/view-panel','/dashboard/control-panel', '/dashboard/upload-details'],
-        title: ['Overview', 'View Panel','Control Panel', 'Upload Details'],
-      });
-    } else if (user.userType === 'examiner') {
-      setPaths({
-        links: ['/', '/dashboard/view-panel', '/dashboard/grading'],
-        title: ['Overview', 'View Panel', 'Grade Details'],
-      });
-    } else if (user.userType === 'mentor') {
-      setPaths({
-        links: ['/', '/dashboard/view-panel', '/dashboard/grading'],
-        title: ['Overview', 'View Panel', 'Grade Details'],
-      });
-    } else if (user.userType === 'student') {
-      setPaths({
-        links: ['/', '/dashboard/team', `/dashboard/project/${user?.projectId || 'project-not-found'}`],
-        title: ['Your Performance', 'Team Details', 'Project'],
-      });
-    }
-  }, [user.userType,user?.projectId]);
   const trigger = useRef(null);
   const sidebar = useRef(null);
-
 
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   );
 
-  
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -83,15 +53,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      }`}
+      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        <NavLink to="/">
-        <h1 className=' text-3xl text-white font-bold'>Cognito</h1>
-        </NavLink>
+        <Link href="/">
+          <h1 className=' text-3xl text-white font-bold'>Cognito</h1>
+        </Link>
 
         <button
           ref={trigger}
@@ -130,19 +99,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               {/* <!-- Menu Item Dashboard --> */}
               <SidebarLinkGroup
                 activeCondition={
-                  pathname === '/' || pathname.includes('dashboard')
+                  pathname.includes('/dashboard')
                 }
               >
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
-                      <NavLink
-                        to="#"
-                        className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                          (pathname === '/dashboard' ||
-                            pathname.includes('grading')|| pathname.includes('project')||pathname.includes('team') ||pathname.includes('upload-details') || pathname.includes('view-panel') || pathname.includes('control-panel')) &&
+                      <Link
+                        href="#"
+                        className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${(pathname === paths.main[0].link || pathname===paths.main[1].link || pathname===paths.main[2].link
+                            ) &&
                           'bg-graydark dark:bg-meta-4'
-                        }`}
+                          }`}
                         onClick={(e) => {
                           e.preventDefault();
                           sidebarExpanded
@@ -177,9 +145,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                         </svg>
                         Dashboard
                         <svg
-                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
-                            open && 'rotate-180'
-                          }`}
+                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${open && 'rotate-180'
+                            }`}
                           width="20"
                           height="20"
                           viewBox="0 0 20 20"
@@ -193,28 +160,27 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             fill=""
                           />
                         </svg>
-                      </NavLink>
+                      </Link>
                       {/* <!-- Dropdown Menu Start --> */}
                       <div
-                        className={`translate transform overflow-hidden ${
-                          !open && 'hidden'
-                        }`}
+                        className={`translate transform overflow-hidden ${!open && 'hidden'
+                          }`}
                       >
                         <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                        {paths.links.map((link, index) => (
-        <li key={index}>
-          <NavLink
-            to={link}
-            className={({ isActive }) =>
-              'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-              (isActive ? '!text-white' : '')
-            }
-          >
-            {paths.title[index]}
-          </NavLink>
-        </li>
-      ))}
-                         
+                          {paths.main.map((item, index) => (
+                            <li key={index}>
+                              <Link
+                                href={item.link}
+                                className={
+                                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white '}
+                                onClick={() => setPathname(item.link)}
+                                
+                              >
+                                {item.title}
+                              </Link>
+                            </li>
+                          ))}
+
                         </ul>
                       </div>
                       {/* <!-- Dropdown Menu End --> */}
@@ -222,13 +188,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   );
                 }}
               </SidebarLinkGroup>
-           
+
               <li>
-                <NavLink
-                  to={`/profile/${user.userId.split('@')[0]}`}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
-                  }`}
+                <Link
+onClick={() => setPathname(paths.profile.link)}
+                  href={paths.profile.link}
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname === paths.profile.link ? 'bg-graydark dark:bg-meta-4':''}`}
                 >
                   <svg
                     className="fill-current"
@@ -247,16 +212,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       fill=""
                     />
                   </svg>
-                  Profile
-                </NavLink>
+                  {paths.profile.title}
+                </Link>
               </li>
-        
+
               <li>
-                <NavLink
-                  to="/notices"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('tables') && 'bg-graydark dark:bg-meta-4'
-                  }`}
+                <Link
+                onClick={() => setPathname(paths.notices.link)}
+                  href={paths.notices.link}
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes('notices') && 'bg-graydark dark:bg-meta-4'
+                    }`}
                 >
                   <svg
                     className="fill-current"
@@ -283,19 +248,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       </clipPath>
                     </defs>
                   </svg>
-                  Notices
-                </NavLink>
+                  {paths.notices.title}
+                </Link>
               </li>
               {/* <!-- Menu Item Tables --> */}
 
               {/* <!-- Menu Item Settings --> */}
               <li>
-                <NavLink
-                  to="/settings"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('settings') &&
+                <Link
+                onClick={() => setPathname(paths.settings.link)}
+                  href={paths.settings.link}
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes('settings') &&
                     'bg-graydark dark:bg-meta-4'
-                  }`}
+                    }`}
                 >
                   <svg
                     className="fill-current"
@@ -326,18 +291,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       </clipPath>
                     </defs>
                   </svg>
-                  Settings
-                </NavLink>
+                  {paths.settings.title}
+                </Link>
               </li>
               {/* <!-- Menu Item Settings --> */}
             </ul>
           </div>
 
-     {}
-        
-         
+          { }
 
-          
+
+
+
         </nav>
         {/* <!-- Sidebar Menu --> */}
       </div>

@@ -7,10 +7,12 @@ import Loader from '@/common/Loader';
 import toast from 'react-hot-toast';
 import useAuth from '@/redux/common/useAuth';
 import { useDispatch } from 'react-redux';
-const SignIn= () => {
+import { login } from '@/redux/common/authSlicer';
+import axios from 'axios';
+const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useRouter();
-
+  const authState = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
@@ -30,69 +32,53 @@ const SignIn= () => {
     return true;
   };
 
-  const Login = (e) => {
+  const Login = async (e) => {
     e.preventDefault();
-
+  
     if (!validateInputs()) {
       return;
     }
-
+  
     setLoading(true);
-
+  
     const url = `/api/auth/login`;
-
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password,selectedOption }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setLoading(false);
-
-        if (data.status === 201) {
-          toast.success('Login Successful');
-
-          const user = {
-            token: data.token,
-            userId: email,
-            userType: selectedOption,
-          };
-
-        //   dispatch(setUser(user));
-
-          // Navigate to the root route or dashboard after successful login
-          navigate.push('/');
-        } else {
-          toast.error(data.error || 'Login failed');
-          setEmail('');
-          setPassword('');
-          setSelectedOption('');
-        }
-      })
-      .catch((error) => {
-        setLoading(false);
-        toast.error(error.message || 'An error occurred');
-      });
+    try {
+      const response = await axios.post(url, { email, password, selectedOption });
+  
+      if (response.data.status === 201) {
+        dispatch(login({
+          isLoggedIn: true,
+          userId: email,
+          token: response.data.token,
+          userType: selectedOption,
+        }));
+        navigate.push(`/dashboard/${selectedOption}`);
+      } else if (response.data.status === 500) {
+        toast.error(response.data.error || 'Login failed');
+      }
+    } catch (error) {
+      toast.error('Login failed');
+    } finally {
+      setLoading(false);
+    }
   };
+  
 
   return (
-<>
+    <>
 
       <div className="rounded-sm border border-stroke bg-white shadow-default h-screen flex flex-col justify-center dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
-          
+
           <div className="hidden w-full xl:block xl:w-1/2">
-       
+
             <div className="py-17.5 px-26 text-center">
               <Link className="mb-5.5 inline-block" href="/">
-              <h1 className=' text-4xl font-bold text-[#1DBF73]'>Cognito</h1>
+                <h1 className=' text-4xl font-bold text-[#1DBF73]'>Cognito</h1>
               </Link>
 
               <p className="2xl:px-20 my-5">
-              Automatic Grading Software for Minor Project fo SATI Students only.
+                Automatic Grading Software for Minor Project fo SATI Students only.
               </p>
 
               <span className="mt-15 inline-block">
@@ -217,9 +203,9 @@ const SignIn= () => {
                   />
                 </svg>
               </span>
-              
+
             </div>
-           
+
           </div>
 
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
@@ -230,8 +216,8 @@ const SignIn= () => {
               </h2>
 
               <form>
-              <div className="mb-4">
-                 <SelectGroupOne selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
+                <div className="mb-4">
+                  <SelectGroupOne selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
                 </div>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
@@ -239,8 +225,8 @@ const SignIn= () => {
                   </label>
                   <div className="relative">
                     <input
-                    onChange={(e)=>setEmail(e.target.value)}
-                    value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      value={email}
                       type="email"
                       placeholder="Enter your email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-[#1DBF73] focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-[#1DBF73]"
@@ -268,12 +254,12 @@ const SignIn= () => {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Re-type Password
+                    Password
                   </label>
                   <div className="relative">
                     <input
-                     onChange={(e)=>setPassword(e.target.value)}
-                     value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      value={password}
                       type="password"
                       placeholder="6+ Characters, 1 Capital letter"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-[#1DBF73] focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-[#1DBF73]"
@@ -305,13 +291,13 @@ const SignIn= () => {
 
                 <div className="mb-5">
                   <button
-                    
-                   onClick={Login}
+
+                    onClick={Login}
                     className="w-full cursor-pointer rounded-lg border border-[#1DBF73] bg-[#1DBF73] p-4 text-white transition hover:bg-opacity-90"
                   >Sign In</button>
                 </div>
 
-          
+
 
                 <div className="mt-6 text-center">
                   <p>
@@ -332,10 +318,10 @@ const SignIn= () => {
           </div>
         </div>
 
-        
-        { loader &&<Loader/>}
+
+        {loader && <Loader />}
       </div>
-      </>
+    </>
   );
 };
 

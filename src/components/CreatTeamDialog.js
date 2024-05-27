@@ -23,9 +23,9 @@ export const CreatTeamDialog= ({open,setOpen,URLLink}) => {
   }, [copyState]);
 
   return (<>
-    { open &&  <div className=" fixed top-0 left-0 z-[10000000] justify-center items-center h-screen w-full">
+    { open &&  <div className=" fixed top-0 left-0 z-[1000000000] justify-center flex items-center h-screen w-full">
      
-        <div className=" w-full max-w-lg mx-auto px-4 bg-white opacity-40">
+        <div className=" w-full max-w-lg mx-auto px-4 bg-white bg-opacity-60">
           <div className="bg-white rounded-md shadow-lg px-4 py-6">
             <div className="flex items-center justify-between">
               <div className="text-lg font-medium  text-graydark">
