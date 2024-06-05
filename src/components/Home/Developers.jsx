@@ -2,7 +2,7 @@
 
 import ThreeDCardDemo from "@/utils/Card"
 
-export default () => {
+export const Developers= () => {
 
     const team = [
       

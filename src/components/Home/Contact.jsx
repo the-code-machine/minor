@@ -2,7 +2,7 @@
 import React from 'react'
 
 
-export default () => {
+export  const Contact= () => {
 
         const contactMethods = [
             {
