@@ -1,23 +1,11 @@
-import flatpickr from 'flatpickr';
+'use client'
+
 import { useEffect, useState } from 'react';
-
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 const DatePickerOne = ({selectedDate, setSelectedDate,title}) => {
+  const [startDate, setStartDate] = useState(new Date());
 
-  useEffect(() => {
-    // Init flatpickr
-    flatpickr('.form-datepicker', {
-      mode: 'single',
-      static: true,
-      monthSelectorType: 'static',
-      dateFormat: 'M j, Y',
-      prevArrow:
-        '<svg className="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
-      nextArrow:
-        '<svg className="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
-    });
-
-    
-  }, []); 
 
   return (
     <div> 
@@ -25,13 +13,7 @@ const DatePickerOne = ({selectedDate, setSelectedDate,title}) => {
         {title}
       </label>
       <div className="relative">
-        <input
-        onChange={(e) => setSelectedDate(e.target.value)}
-        value={selectedDate}
-          className="form-datepicker w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal outline-none transition focus:border-black active:border-black dark:border-form-strokedark dark:bg-form-input dark:focus:border-black"
-          placeholder="mm/dd/yyyy"
-          data-class="flatpickr-right"
-        />
+      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
 
         <div className=" cursor-pointer absolute inset-0 left-auto right-5 flex items-center">
           <svg

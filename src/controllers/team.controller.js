@@ -156,7 +156,8 @@ const sendTeamDetails = async (teamId) => {
       permissions: team.permissions, // Ensure proper structure
       createdAt: team.createdAt, // If using timestamps
       updatedAt: team.updatedAt, // If using timestamps
-      teamConfirmed:team.teamConfirmed
+      teamConfirmed:team.teamConfirmed,
+      teamId: team.teamId,
     }
     return {
       data: data, status: 201

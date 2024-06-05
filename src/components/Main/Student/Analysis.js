@@ -1,17 +1,18 @@
-import React, { useContext } from 'react';
+'use client'
+import React from 'react';
 import CardDataStats from '../../../components/CardDataStats';
 import ChartOne from '../../../components/Charts/ChartOne';
 
 import ChartTwo from '../../../components/Charts/ChartTwo';
 
 
-import DefaultLayout from '../../../layout/DefaultLayout';
+
 import { useSelector } from 'react-redux';
 
 export const Analysis = () => {
-  const user = useSelector((state) => state);
+  const user = useSelector((state) => state.auth);
   return (
-    <DefaultLayout  user={user}>
+  <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-5 2xl:gap-7.5">
         <CardDataStats title="Synopsis" total="10/50" rate="0.43%" levelUp>
         <img src='/svg/planing.svg'/>
@@ -40,7 +41,8 @@ export const Analysis = () => {
         </div>
         <ChatCard /> */}
       </div>
-    </DefaultLayout>
+      </>
+
   );
 };
 

@@ -165,8 +165,10 @@ export const Team = () => {
 
       <div className="col-span-5 xl:col-span-3 w-full">
         <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-          <div className="border-b border-stroke py-4 px-7 dark:border-strokedark">
-            <h3 className="font-medium text-black dark:text-white">Team Information</h3>
+          <div className="border-b border-stroke py-4 px-7 flex justify-between dark:border-strokedark">
+            <h3 className="font-medium text-black dark:text-white">Team Mentor : {team?.mentorId?.toUpperCase()}</h3>
+            <h3 className="font-medium text-black dark:text-white">Team Leader : {team?.leaderName?.toUpperCase()}</h3>
+            <h3 className="font-medium text-black dark:text-white">Team Code : {team?.teamId}</h3>
           </div>
           <div className="p-7">
             <form>

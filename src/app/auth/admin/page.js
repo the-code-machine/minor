@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation';
 import Loader from '@/common/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 
-
+import { login } from '@/redux/common/authSlicer';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 const AdminLogin= () => {
   const user = useSelector(state=>state);
   const navigate=useRouter();
@@ -13,7 +15,7 @@ const AdminLogin= () => {
   const selectedOption ='admin';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const[loader,showLoader]=useState(false);
+  const[isLoading,setLoading]=useState(false);
 
   const DetailsValidation = () => {
     if (email === '' || password === '' ) {
@@ -30,50 +32,39 @@ const AdminLogin= () => {
       return true;
     }
   };
-  const Login =(e)=>{
+  const Login = async (e) => {
     e.preventDefault();
+  
     if (!DetailsValidation()) {
       return;
     }
-    showLoader(true);
-    const url = `api/auth/admin`;
+  
+    setLoading(true);
 
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password ,selectedOption}),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === 200) {
-          showLoader(false);
-          toast.success("Login Successfull");
-          const usern = {userType:selectedOption,userId:email,token:data.token}
-        //  dispatch(setUser(usern))
-          setPassword('');  
-          setEmail('');
-         
-          navigate.push('/dashboard');
-      
-         
-        } else {
-          toast.error(data.error);
-          showLoader(false);
-          setPassword('');
-          setEmail('');
-         
-        }
-      })
-      .catch((error) => {
-        toast.error(error);
-        showLoader(false);
-      });
-  }
+    const url = `/api/auth/login`;
+    try {
+      const response = await axios.post(url, { email, password, selectedOption });
+  
+      if (response.data.status === 201) { 
+        dispatch(login({
+          isLoggedIn: true,
+          userId: email,
+          token: response.data.token,
+          userType: selectedOption,
+        }));
+        navigate.push(`/dashboard/${selectedOption}`);
+      } else if (response.data.status === 500) {
+        toast.error(response.data.error || 'Login failed');
+      }
+    } catch (error) {
+      toast.error('Login failed');
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
 <>
-
+{ isLoading && <Loader/>}
       <div className="rounded-sm border border-stroke bg-white shadow-default h-screen flex flex-col justify-center dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
           
@@ -321,7 +312,7 @@ const AdminLogin= () => {
         </div>
 
       
-        { loader &&<Loader/>}
+      
       </div>
       </>
   );

@@ -1,53 +1,35 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const { Schema } = mongoose;
 
-// Define a schema for user profile information
-const projectSchema = new Schema({
-  userId: {
-    type: String, // Change from ObjectId to String
-    required: true,
-    unique: true, // Ensures emails are unique
-  },
-  fullName: {
-    type: String,
-    
-  },
-  linkedinUrl: {
-    type: String,
-  },
-  twitterUrl: {
-    type: String,
-  },
-  githubUrl: {
-    type: String,
-  },
-  bio: {
-    type: String,
-  },
-  profileImage: {
-    type: String, // URL or file reference
-  },
-  coverImage: {
-    type: String, // URL or file reference
-  },
-  userType: {
-    type: String, // URL or file reference
-  },
-  teamId: {
-    type: String, // URL or file reference
-  },
-  mentorId: {
-    type: String, // URL or file reference
-  },
-  projectId: {
-    type: String, // URL or file reference
-  },
-  examinerId: {
-    type: String, // URL or file reference
-  },
+const workDocumentSchema = new Schema({
+  work: String,
+  documentUrl: String,
 });
 
-// Create the model
-const UserProfile = mongoose.model('UserProfile', userProfileSchema);
+const roleSchema = new Schema({
+  projectManager: [workDocumentSchema],
+  designer: [workDocumentSchema],
+  tester: [workDocumentSchema],
+  developer: [workDocumentSchema],
+});
 
-module.exports = UserProfile;
+const projectSchema = new Schema({
+  projectId: { type: String, unique: true, required: true },
+  title: { type: String},
+  description: String,
+  mentorId: String,
+  leaderId: String,
+  synopsis: roleSchema,
+  implementation: roleSchema,
+  deployment: roleSchema,
+  testing: roleSchema,
+  finalReport: roleSchema,
+  SynopisDocument: String,
+  ImplementationDocument: String,
+  DeploymentDocument: String,
+  TestingDocument: String,
+  FinalReportDocument: String,
+});
+
+export default mongoose.models.Project || mongoose.model('Project', projectSchema);

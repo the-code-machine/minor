@@ -1,15 +1,16 @@
+'use client'
 import React, { useContext, useState } from 'react';
 import { ApexOptions } from 'apexcharts';
 import ReactApexChart from 'react-apexcharts';
+
 import CardDataStats from '../../../components/CardDataStats';
-import DefaultLayout from '../../../layout/DefaultLayout';
 import { useSelector } from 'react-redux';
 
 
 export const Analysis = () => {
     const user = useSelector(state => state);
   return (
-    <DefaultLayout  user={user}>
+<>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-5 2xl:gap-7.5">
         <CardDataStats title="Synopsis Submissions" total="10/50" rate="0.43%" levelUp>
         <img src='/svg/planing.svg'/>
@@ -38,7 +39,7 @@ export const Analysis = () => {
         </div>
         <ChatCard /> */}
       </div>
-    </DefaultLayout>
+      </>
   );
 };
 

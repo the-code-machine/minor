@@ -251,5 +251,9 @@ module.exports = {
         'spin-2': 'spin 2s linear infinite',
         'spin-3': 'spin 3s linear infinite',
       },
-    },}
+    },},
+
+    images: {
+      domains: ['assets.aceternity.com'],
+    },
 };

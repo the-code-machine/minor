@@ -1,12 +1,12 @@
+'use client'
 import React, { useState } from 'react';
-import DefaultLayout from '../../../layout/DefaultLayout';
 import { useSelector } from 'react-redux';
 
 export const Project = () => {
     const user = useSelector(state=>state); 
     const[active,setActive]=useState('Description')
   return (
-    <DefaultLayout  user={user}>
+ <>
      <div className="flex space-x-1.5 w-full overflow-x-auto scroll-bar">
      <CardDataStats active={active} setActive={setActive} title="Description" total="24/50" rate="0.95%" levelDown>
         <img src='/svg/description.svg' className='w-12 h-12 object-contain p-1'/>
@@ -46,7 +46,7 @@ export const Project = () => {
       {
          active=='Testing' &&<><Testing/></>
    }
-    </DefaultLayout>
+   </>
   );
 };
 

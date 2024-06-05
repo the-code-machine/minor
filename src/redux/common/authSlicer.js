@@ -10,6 +10,8 @@ const initialState = {
   twitterUrl: null,
   profileImage: null,
   coverImage: null,
+  isFetching:false,
+  teamId:null,
 };
 
 const authSlice = createSlice({
@@ -31,10 +33,18 @@ const authSlice = createSlice({
     update: (state, action) => {
       // Merge the existing state with the updated fields
       return { ...state, ...action.payload };
+
+    },
+
+    startFetch: (state) => {
+      state.isFetching = true;
+    },
+    doneFetch: (state) => {
+      state.isFetching = false;
     },
   },
 });
 
-export const { login, logout, update } = authSlice.actions;
+export const { login, logout, update ,startFetch,doneFetch} = authSlice.actions;
 
 export default authSlice.reducer;

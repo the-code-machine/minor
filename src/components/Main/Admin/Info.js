@@ -1,8 +1,7 @@
-import { useContext, useState } from 'react';
+'use client'
+import {  useState } from 'react';
 import Breadcrumb from '../../../components/Breadcrumbs/Breadcrumb';
-import DefaultLayout from '../../../layout/DefaultLayout';
-import UserContext from '../../../Context';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
 
@@ -25,10 +24,10 @@ export const Info = () => {
 
  const user = useSelector(state => state );
   return (
-    <DefaultLayout user={user}>
+   <>
       <Breadcrumb pageName={"View Panel"}/>
      <TableOne brandData={brandData}/>
-    </DefaultLayout>
+     </>
   );
 };
 

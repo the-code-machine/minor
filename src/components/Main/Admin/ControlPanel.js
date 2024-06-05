@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react';
+'use client'
+import { useState } from 'react';
 import Breadcrumb from '../../../components/Breadcrumbs/Breadcrumb';
-import DefaultLayout from '../../../layout/DefaultLayout';
 
-import { Link } from 'react-router-dom';
+
+import Link from 'next/link';
 import DatePickerOne from '../../../components/Forms/DatePicker/DatePickerOne';
 import { useSelector } from 'react-redux';
 
@@ -14,10 +15,10 @@ export const ControlPanel = () => {
 
   const user = useSelector((state) => state);
   return (
-    <DefaultLayout user={user}>
+<>
         <Breadcrumb pageName={"Control Panel"}/>
      <TableOne />
-    </DefaultLayout>
+     </>
   );
 };
 

@@ -1,15 +1,28 @@
 'use client'
+import { CreateProject } from '@/components/Main/Student/CreateProject'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import Loader from '@/common/Loader'
+const Page =()=> {
+  const isFetching = useSelector((state) => state.team.isFetching);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const dispatched = async () => {
+      dispatch({ type: 'AUTH_STATE_CHANGED' });
+      dispatch({ type: 'Team_STATE_CHANGED' });
+      dispatch({ type: 'PROJECT_STATE_CHANGED' });
+      
+    };
 
-function page() {
-  const user = useSelector((state)=>state.auth)
-  useEffect(()=>{
-    console.log(user)
-  },[user])
+    dispatched();
+  }, []);
+
   return (
-    <div>page</div>
+    <div>
+      {isFetching && <Loader/>}
+      <CreateProject/></div>
   )
 }
 
-export default page
+export default Page

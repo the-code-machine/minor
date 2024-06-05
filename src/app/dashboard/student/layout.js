@@ -36,11 +36,12 @@ export default function RootLayout({ children }) {
 
   return (
     <>
-      {user !== null && user?.isLoggedIn ? (
+      {user?.userType ==='student' && user?.isLoggedIn ? (
         <DefaultLayout user={user} paths={StudentDashBoard}>
           {children}
         </DefaultLayout>
-      ):   <Link href={'/auth/login'} className="w-full h-screen cursor-pointer bg-white flex justify-center items-center text-xl font-bold">
+      ):  
+       <Link href={'/auth/login'} className="w-full h-screen cursor-pointer bg-white flex justify-center items-center text-xl font-bold">
       Go to Login
     </Link>}
       <Toaster />

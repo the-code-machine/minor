@@ -1,14 +1,12 @@
-import { useContext } from 'react';
+'use client'
+import Link from 'next/link';
 import Breadcrumb from '../../../components/Breadcrumbs/Breadcrumb';
-import DefaultLayout from '../../../layout/DefaultLayout';
-import UserContext from '../../../Context';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export const Upload = () => {
 const user = useSelector(state =>state);
   return (
-    <DefaultLayout user={user}>
+ 
       <div className="mx-auto max-w-270">
         <Breadcrumb pageName="Upload Details" />
 
@@ -38,7 +36,7 @@ const user = useSelector(state =>state);
                     >
                       View Format
                     </button>
-                    <Link to={'https://docs.google.com/spreadsheets/d/1N97t6k6HO-neCP4ni1al9gPC22UA3lGozMmecxXxybU/edit?usp=sharing'}
+                    <Link href={'https://docs.google.com/spreadsheets/d/1N97t6k6HO-neCP4ni1al9gPC22UA3lGozMmecxXxybU/edit?usp=sharing'}
                       className="flex justify-center rounded bg-black py-2 px-6 font-medium text-gray hover:bg-opacity-90"
 
                     >
@@ -72,7 +70,7 @@ const user = useSelector(state =>state);
                     >
                       View Format
                     </button>
-                    <Link to={'https://docs.google.com/spreadsheets/d/1OmMF7nI-e8X86I5Ld6qgh7V_GlRJXjfMdXhvGYkj50M/edit?usp=sharing'}
+                    <Link href={'https://docs.google.com/spreadsheets/d/1OmMF7nI-e8X86I5Ld6qgh7V_GlRJXjfMdXhvGYkj50M/edit?usp=sharing'}
                       className="flex justify-center rounded bg-black py-2 px-6 font-medium text-gray hover:bg-opacity-90"
 
                     >
@@ -106,7 +104,7 @@ const user = useSelector(state =>state);
                     >
                       View Format
                     </button>
-                    <Link to={'https://docs.google.com/spreadsheets/d/1N97t6k6HO-neCP4ni1al9gPC22UA3lGozMmecxXxybU/edit?usp=sharing'}
+                    <Link href={'https://docs.google.com/spreadsheets/d/1N97t6k6HO-neCP4ni1al9gPC22UA3lGozMmecxXxybU/edit?usp=sharing'}
                       className="flex justify-center rounded bg-black py-2 px-6 font-medium text-gray hover:bg-opacity-90"
 
                     >
@@ -121,7 +119,7 @@ const user = useSelector(state =>state);
 
         </div>
       </div>
-    </DefaultLayout>
+  
   );
 };
 
