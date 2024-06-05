@@ -84,7 +84,7 @@ const DashboardAdminInfo = ({ tableHead, tableData }) => {
             {tableHead.map((header, idx) => (
              
           
-                <button  className={`lg:text-xl hover:text-white hover:bg-black text-md font-semibold border-2  bg-transparent text-black border-black  rounded p-2 dark:text-white`}>
+                <button key={idx+1} className={`lg:text-xl hover:text-white hover:bg-black text-md font-semibold border-2  bg-transparent text-black border-black  rounded p-2 dark:text-white`}>
                 {item[header.replace(/\s+/g, '').toLowerCase()]}
               </button>
             ))}

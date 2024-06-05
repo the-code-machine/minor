@@ -123,11 +123,11 @@ const RequestsAdminInfo = () => {
             </div>
     
             {TeamData.map((item, key) => (
-              <div className={`grid grid-cols-${tableHead.length} gap-5 py-5`} key={key}>
+              <div  className={`grid grid-cols-${tableHead.length} gap-5 py-5`} key={key}>
                 {tableHead.map((header, idx) => (
                  
                  
-                  <button  className={`mb-6 lg:text-xl text-md  hover:text-white hover:bg-black font-semibold border-2  text-black bg-transparent border-black lg:px-3 lg:py-2 rounded p-2 dark:text-white`}>
+                  <button key={idx+1} className={`mb-6 lg:text-xl text-md  hover:text-white hover:bg-black font-semibold border-2  text-black bg-transparent border-black lg:px-3 lg:py-2 rounded p-2 dark:text-white`}>
                   {item[header.replace(/\s+/g, '').toLowerCase()]}
                 </button>
                 ))}

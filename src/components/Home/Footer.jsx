@@ -3,19 +3,19 @@ export const Footer = () => {
 
     const footerNavs = [
         {
-            href: 'javascript:void()',
+            href: '',
             name: 'Terms'
         },
         {
-            href: 'javascript:void()',
+            href: '',
             name: 'License'
         },
         {
-            href: 'javascript:void()',
+            href: '',
             name: 'Privacy'
         },
         {
-            href: 'javascript:void()',
+            href: '',
             name: 'About us'
         }
     ]
@@ -44,7 +44,7 @@ export const Footer = () => {
                     <ul className="flex flex-wrap items-center gap-4 mt-6 sm:text-sm sm:mt-0">
                         {
                             footerNavs.map((item, idx) => (
-                                <li className="text-gray-800 hover:text-gray-500 duration-150">
+                                <li key={idx+1} className="text-gray-800 hover:text-gray-500 duration-150">
                                     <a key={idx} href={item.href}>
                                         {item.name}
                                     </a>
