@@ -1,5 +1,3 @@
-'use client'
-
 import { Analysis } from "@/components/Main/Student/Analysis";
 
 
