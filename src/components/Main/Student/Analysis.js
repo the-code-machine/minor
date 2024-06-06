@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useEffect } from 'react';
 import CardDataStats from '../../../components/CardDataStats';
 import ChartOne from '../../../components/Charts/ChartOne';
 
@@ -10,7 +10,7 @@ import ChartTwo from '../../../components/Charts/ChartTwo';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '@/common/Loader';
 
-export const Analysis = () => {
+export const Analysis = () => { 
   const dispatch = useDispatch() 
   const isFetching = useSelector((state)=>state.project.isFetching)
   useEffect(() => {
