@@ -32,7 +32,7 @@ const user = useSelector((state)=>state.auth)
                        { user.token != null?<Link href={`/dashboard/${user.userType}`} className="block py-2 px-4 text-center bg-white font-medium text-black duration-150  rounded-lg shadow-lg hover:shadow-none">
                             DashBoard
                         </Link>: <Link href="/auth/login" className="block py-2 px-4 text-center bg-white font-medium text-black duration-150  rounded-lg shadow-lg hover:shadow-none">
-                            Let's get started
+                            Lets get started
                         </Link>}
                       
                     </div>
