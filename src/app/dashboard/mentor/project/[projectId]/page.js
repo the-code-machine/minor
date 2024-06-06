@@ -33,10 +33,8 @@ export default function Home() {
 };
 
 const ProjectView = () => {
-    let paths;
-    if (typeof window !== 'undefined') {
-     paths = window.location.pathname.split('/')
-      }
+    let paths = window.location.pathname.split('/')
+      
     
     const authState = useSelector((state) => state.auth);
 
