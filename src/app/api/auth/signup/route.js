@@ -23,7 +23,7 @@ export async function POST(request) {
     const res = await signupUser(UserModel, email, password, selectedOption);
     return NextResponse.json({ message:res,status:201 });
   } catch (err) {
-    console.error('Error generating OTP:', err.message);
-    return NextResponse.error({ status: 500 });
+    console.error('Error signing up:', err.message);
+    return NextResponse.json({ status: 500 });
   }
 }

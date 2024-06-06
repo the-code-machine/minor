@@ -13,20 +13,20 @@ const signupUser = async (UserModel, email, password, userType) => {
     // Check if user already exists
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
-      return { error: 'User already exists', status: 500 }; // Conflict
+      return 'User already exists' 
     }
     if (userType.toLowerCase() === 'mentor') {
       const allDocuments = await MentorStudentExaminer.find(); // Retrieve all documents
 
       if (!allDocuments.length) {
-        return { error: 'Mentor data not found. Please contact admin.', status: 500 }; // No data found
+        return 'Mentor data not found. Please contact admin.'
       }
       const isMentorEligible = allDocuments.some(doc => {
         return doc.data.some(row => row[4] === email); // Check if any row contains the email
       });
 
       if (!isMentorEligible) {
-        return { error: 'Not eligible to sign up as mentor. Please contact admin.', status: 500 }; // Forbidden
+        return  'Not eligible to sign up as mentor. Please contact admin.' // Forbidden
       }
     }
     const newUser = new UserModel({ email, password, userType });
@@ -35,7 +35,7 @@ const signupUser = async (UserModel, email, password, userType) => {
     return  'User signed up successfully'
   } catch (error) {
     console.error('Error during signup:', error);
-    return error.message
+    return 'User signup failed'
   }
 };
 

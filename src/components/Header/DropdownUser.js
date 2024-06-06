@@ -114,7 +114,7 @@ const DropdownUser = ({user}) => {
        
           <li>
             <Link
-              href="/settings"
+              href={`/dashboard/${user?.userType}/settings`}
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-black lg:text-base"
             >
               <svg
