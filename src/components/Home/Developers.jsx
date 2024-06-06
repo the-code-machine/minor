@@ -16,7 +16,7 @@ export const Developers= () => {
             github: ""
         },
         {
-            avatar: "https://commons.m.wikimedia.org/wiki/File:Wikimedia-Summit-2024-Saturday-160.jpg",
+            avatar: "https://media.licdn.com/dms/image/D4D35AQGojFwVxeIRQA/profile-framedphoto-shrink_800_800/0/1714336166986?e=1718251200&v=beta&t=outcctWH83FD84xeksFp0OF5YZ5w-o3WZtQ5_WBAIIQ",
             name: "Shreya Dwivedi",
             title: "Head of designers",
             desc: "DataBase Architect ",
