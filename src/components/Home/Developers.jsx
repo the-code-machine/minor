@@ -16,7 +16,7 @@ export const Developers= () => {
             github: ""
         },
         {
-            avatar: "https://media.licdn.com/dms/image/D4D35AQGojFwVxeIRQA/profile-framedphoto-shrink_800_800/0/1714336166986?e=1718251200&v=beta&t=outcctWH83FD84xeksFp0OF5YZ5w-o3WZtQ5_WBAIIQ",
+            avatar: "https://commons.m.wikimedia.org/wiki/File:Wikimedia-Summit-2024-Saturday-160.jpg",
             name: "Shreya Dwivedi",
             title: "Head of designers",
             desc: "DataBase Architect ",
@@ -28,7 +28,7 @@ export const Developers= () => {
             avatar: "https://media.licdn.com/dms/image/D4D03AQHRY2XHRQ1Bkg/profile-displayphoto-shrink_800_800/0/1716998925288?e=1723075200&v=beta&t=Gvb3YCHhh50Ev6ZpTmYHhHhBDASAZf3mOOkLwKwdGxU",
             name: "Dev Jadiya",
             title: "Head of designers",
-            desc: "Machine Learning & Assesment",
+            desc: "DevOps Engineer & Software Developer",
             linkedin: "https://www.linkedin.com/in/devjadiya/",
             twitter: "",
             github: ""
