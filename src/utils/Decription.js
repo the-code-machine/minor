@@ -1,3 +1,4 @@
+'use client'
 import Loader from '@/common/Loader';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
@@ -37,7 +38,7 @@ export const SendDescription = () => {
             if (response.ok) {
                 setIsSubmitting(false) 
                 toast.success('Project updated successfully');
-                window.location.reload();
+               
             } else {
                 setIsSubmitting(false)
                 toast.error('Error updating project');
