@@ -7,9 +7,22 @@ import ChartTwo from '../../../components/Charts/ChartTwo';
 
 
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Loader from '@/common/Loader';
 
 export const Analysis = () => {
+  const dispatch = useDispatch() 
+  const isFetching = useSelector((state)=>state.project.isFetching)
+  useEffect(() => {
+    const dispatched = async () => {
+    
+      dispatch({ type: 'AUTH_STATE_CHANGED' });
+      dispatch({ type: 'Team_STATE_CHANGED' });
+      dispatch({ type: 'PROJECT_STATE_CHANGED' });
+    };
+
+    dispatched();
+  }, []);
   const team = useSelector((state) => state.project);
   console.log(team)
   const Marks =(section)=>{
@@ -41,7 +54,7 @@ export const Analysis = () => {
      }
   }
   return (
-  <>
+  <>{ isFetching && <Loader/>}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-5 2xl:gap-7.5">
         <CardDataStats title="Synopsis" total={Marks('synopsis')} rate="0.43%" levelUp>
         <img src='/svg/planing.svg'/>

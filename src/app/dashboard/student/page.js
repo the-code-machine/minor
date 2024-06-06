@@ -1,7 +1,16 @@
-import React from 'react'
+'use client'
 
-export default function page() {
+import { Analysis } from "@/components/Main/Student/Analysis";
+
+
+
+export default function Home() {
+
+
   return (
-    <div>page</div>
-  )
+<>
+
+<Analysis/>
+</>
+  );
 }
