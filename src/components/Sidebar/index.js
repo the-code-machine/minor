@@ -59,7 +59,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, user, paths }) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
         <Link href="/">
-          <h1 className=' text-3xl text-white font-bold'>Cognito</h1>
+          <h1 className=' text-3xl text-white font-bold'>Submify</h1>
         </Link>
 
         <button

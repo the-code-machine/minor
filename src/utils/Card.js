@@ -6,7 +6,7 @@ import Link from "next/link";
 function ThreeDCardDemo(props) {
   return (
     <CardContainer className="inter-var">
-      <CardBody className=" bg-white relative group/card   h-auto rounded-xl p-6   ">
+      <CardBody className=" bg-white relative group/card w-60  h-auto rounded-xl p-3   ">
         <CardItem
           translateZ="50"
           className="text-xl font-bold text-black dark:text-white"
@@ -20,12 +20,12 @@ function ThreeDCardDemo(props) {
         >
           {props.des}
         </CardItem>
-        <CardItem translateZ="100" className="w-full mt-4">
+        <CardItem translateZ="100" className=" mt-4">
           <img
             src={props.src}
             height="1000"
             width="1000"
-            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+            className="h-32 object-cover rounded-xl group-hover/card:shadow-xl"
             alt="thumbnail"
           />
         </CardItem>

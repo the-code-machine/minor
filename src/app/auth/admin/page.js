@@ -72,7 +72,7 @@ const AdminLogin= () => {
        
             <div className="py-17.5 px-26 text-center">
               <Link className="mb-5.5 inline-block" href="/">
-              <h1 className=' text-4xl font-bold text-[#1DBF73]'>Cognito</h1>
+              <h1 className=' text-4xl font-bold text-[#1DBF73]'>Submify</h1>
               </Link>
 
               <p className="2xl:px-20 my-5">

@@ -122,7 +122,7 @@ const SignUp = () => {
         <div className="hidden w-full xl:block xl:w-1/2">
           <div className="py-5.5 px-26 text-center">
             <Link className="mb-5.5 inline-block" href="/">
-              <h1 className=' text-4xl font-bold text-[#1DBF73]'>Cognito</h1>
+              <h1 className=' text-4xl font-bold text-[#1DBF73]'>Submify</h1>
             </Link>
             <p className="2xl:px-20 my-5">
               Automatic Grading Software for Minor Project fo SATI Students only.
@@ -257,7 +257,7 @@ const SignUp = () => {
           <div className="w-full p-2 sm:p-5.5 xl:p-5.5">
             <span className="mb-1.5 block font-medium">Minor Project</span>
             <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-              Sign Up to Cognito
+              Sign Up to Submify
             </h2>
 
             <form>

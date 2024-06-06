@@ -10,23 +10,52 @@ import ChartTwo from '../../../components/Charts/ChartTwo';
 import { useSelector } from 'react-redux';
 
 export const Analysis = () => {
-  const user = useSelector((state) => state.auth);
+  const team = useSelector((state) => state.project);
+  console.log(team)
+  const Marks =(section)=>{
+
+      const synopsis = team.synopsis ? (team.synopsisGrade || 'Not Graded') : 'Not Submitted';
+      const implementation = team.implementation ? (team.implementationGrade || 'Not Graded') : 'Not Submitted';
+      const deployment = team.deployment ? (team.deploymentGrade || 'Not Graded') : 'Not Submitted';
+      const testing = team.testing ? (team.testingGrade || 'Not Graded') : 'Not Submitted';
+      const finalreport = team.finalReport ? (team.finalReportGrade || 'Not Graded') : 'Not Submitted';
+
+  if(section === 'synopsis')
+    {
+      return synopsis
+    }
+    else if(section === 'implementation')
+      {
+        return implementation
+      }
+      else if( section === 'deployment')
+        {
+          return deployment
+        }
+        else if(section === 'testing')
+          {
+            return testing
+          }
+     else{
+      return finalreport
+     }
+  }
   return (
   <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-5 2xl:gap-7.5">
-        <CardDataStats title="Synopsis" total="10/50" rate="0.43%" levelUp>
+        <CardDataStats title="Synopsis" total={Marks('synopsis')} rate="0.43%" levelUp>
         <img src='/svg/planing.svg'/>
         </CardDataStats>
-        <CardDataStats title="Implementation" total="20/50" rate="4.35%" levelUp>
+        <CardDataStats title="Implementation" total={Marks('implementation')} rate="4.35%" levelUp>
         <img src='/svg/implementation.svg'/>
         </CardDataStats>
-        <CardDataStats title="Deployment" total="35/50" rate="2.59%" levelUp>
+        <CardDataStats title="Deployment" total={Marks('deployment')} rate="2.59%" levelUp>
         <img src='/svg/deployment.svg'/>
         </CardDataStats>
-        <CardDataStats title="Testing" total="40/50" rate="0.95%" levelDown>
+        <CardDataStats title="Testing" total={Marks('testing')} rate="0.95%" levelDown>
         <img src='/svg/testing.svg'/>
         </CardDataStats>
-        <CardDataStats title="Final Report" total="24/50" rate="0.95%" levelDown>
+        <CardDataStats title="Final Report" total={Marks('finalReport')} rate="0.95%" levelDown>
         <img src='/svg/finalreport.svg'/>
         </CardDataStats>
       </div>

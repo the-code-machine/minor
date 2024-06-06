@@ -67,7 +67,7 @@ function generateOTPEmailTemplate(otp) {
                       letter-spacing: 0.56px;
                     "
                   >
-                    Thank you for Registering on Cognito. Use the following OTP
+                    Thank you for Registering on Submify. Use the following OTP
                     to complete the procedure to verify your email address. OTP is
                     valid for <span style="font-weight: 600; color: #1f1f1f;">5 minutes</span>.
                     Do not share this code with others.
@@ -111,7 +111,7 @@ function generateOTPEmailTemplate(otp) {
                 border-top: 1px solid #e6ebf1;
               "
             >
-              <p style="margin: 0; margin-top: 40px; font-size: 16px; font-weight: 600; color: #434343;">Cognito</p>
+              <p style="margin: 0; margin-top: 40px; font-size: 16px; font-weight: 600; color: #434343;">Submify</p>
               <p style="margin: 0; margin-top: 8px; color: #434343;">The Official Automatic Grading Software of SATI.</p>
               <div style="margin: 0; margin-top: 16px;">
                 <a href="https://www.instagram.com/sarthak_io/" target="_blank" style="display: inline-block; margin-left: 8px;">
@@ -121,7 +121,7 @@ function generateOTPEmailTemplate(otp) {
                   <img width="36px" alt="Twitter" src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661503043040_372004/email-template-icon-twitter" />
                 </a>
               </div>
-              <p style="margin: 0; margin-top: 16px; color: #434343;">Copyright © 2024 Cognito. All rights reserved.</p>
+              <p style="margin: 0; margin-top: 16px; color: #434343;">Copyright © 2024 Submify. All rights reserved.</p>
             </footer>
           </div>
         </body>
@@ -191,7 +191,7 @@ function generateOTPEmailTemplate(otp) {
                   </h1>
                 
                   <p style="margin: 0; margin-top: 17px; font-weight: 500; letter-spacing: 0.56px;">
-                  You've requested to reset your password on Cognito. Use the following OTP
+                  You've requested to reset your password on Submify. Use the following OTP
                   to complete the reset process. This OTP is valid for 
                   <span style="font-weight: 600; color: #1f1f1f;">5 minutes</span>. 
                   For your security, do not share this code with anyone.
@@ -237,7 +237,7 @@ function generateOTPEmailTemplate(otp) {
                 border-top: 1px solid #e6ebf1;
               "
             >
-              <p style="margin: 0; margin-top: 40px; font-size: 16px; font-weight: 600; color: #434343;">Cognito</p>
+              <p style="margin: 0; margin-top: 40px; font-size: 16px; font-weight: 600; color: #434343;">Submify</p>
               <p style="margin: 0; margin-top: 8px; color: #434343;">The Official Automatic Grading Software of SATI.</p>
               <div style="margin: 0; margin-top: 16px;">
                 <a href="https://www.instagram.com/sarthak_io/" target="_blank" style="display: inline-block; margin-left: 8px;">
@@ -247,7 +247,7 @@ function generateOTPEmailTemplate(otp) {
                   <img width="36px" alt="Twitter" src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661503043040_372004/email-template-icon-twitter" />
                 </a>
               </div>
-              <p style="margin: 0; margin-top: 16px; color: #434343;">Copyright © 2024 Cognito. All rights reserved.</p>
+              <p style="margin: 0; margin-top: 16px; color: #434343;">Copyright © 2024 Submify. All rights reserved.</p>
             </footer>
           </div>
         </body>

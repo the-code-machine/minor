@@ -11,7 +11,7 @@ export const TabsDemo=()=> {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-black">
           <p>Students guide</p>
-          <DummyContent />
+          <DummyContent1 />
         </div>
       ),
     },
@@ -21,7 +21,7 @@ export const TabsDemo=()=> {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-black">
           <p>Mentors Guide</p>
-          <DummyContent />
+          <DummyContent2 />
         </div>
       ),
     },
@@ -31,7 +31,7 @@ export const TabsDemo=()=> {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-black">
           <p>Examiners Guide</p>
-          <DummyContent />
+          <DummyContent3 />
         </div>
       ),
     },
@@ -46,10 +46,32 @@ export const TabsDemo=()=> {
   );
 }
 
-const DummyContent = () => {
+const DummyContent1 = () => {
   return (
     <img
-      src="https://img.freepik.com/free-vector/project-management-business-multitasking-concept-flat-line-art-icons_126523-2192.jpg"
+      src="https://firebasestorage.googleapis.com/v0/b/cloudburstofficial.appspot.com/o/1.png?alt=media&token=8a500fea-8c3d-4a72-ba65-cc5b8f3d1bd8"
+      alt="dummy image"
+      width="1000"
+      height="1000"
+      className="object-cover object-left-top h-[60%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
+    />
+  );
+};
+const DummyContent2= () => {
+  return (
+    <img
+      src="https://firebasestorage.googleapis.com/v0/b/cloudburstofficial.appspot.com/o/2.png?alt=media&token=9b6336af-01f9-4f97-acbb-c61380a8f001"
+      alt="dummy image"
+      width="1000"
+      height="1000"
+      className="object-cover object-left-top h-[60%]  md:h-[90%] absolute -bottom-10 inset-x-0 w-[90%] rounded-xl mx-auto"
+    />
+  );
+};
+const DummyContent3 = () => {
+  return (
+    <img
+      src="https://firebasestorage.googleapis.com/v0/b/cloudburstofficial.appspot.com/o/3.png?alt=media&token=2f28549a-0624-4b16-a4b5-d09b12f7e335"
       alt="dummy image"
       width="1000"
       height="1000"

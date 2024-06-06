@@ -1,26 +1,29 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { Link as Link1 } from 'react-scroll';
+import { SparklesPreview } from './Hero';
+const navigation = [
+    { title: "How to use?", path: "use" },
+    { title: "Developers", path: "developer" },
+    { title: "Contact us", path: "contact" },
+ 
+]
 export const NavbarView= () => {
 
     const [state, setState] = useState(false)
+ const user = useSelector((state)=>state.auth)
+ 
 
-  // Replace javascript:void(0) path with your path
-  const navigation = [
-      { title: "How to use?", path: "use" },
-      { title: "Developers", path: "developer" },
-      { title: "Contact us", path: "contact" },
-   
-  ]
   
     return (
-        <div className=''>
+        <div className=' w-full  bg-black-2'>
             <header className='h-[10vh]'>
-                <nav className="items-center pt-5 px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6">
+                <nav className="items-center py-5  shadow w-full justify-center px-32 md:flex md:space-x-6">
                     <div className="flex justify-between">
-                        <a href="/" className='text-black font-semibold text-2xl'>
-                           Cognito
+                        <a href="/" className='text-black  font-bold text-2xl'>
+                           Submify
                         </a>
                         <button className="text-gray-500 outline-none md:hidden"
                             onClick={() => setState(!state)}
@@ -41,14 +44,16 @@ export const NavbarView= () => {
                     </div>
                     <ul className={`flex-1 justify-between mt-12 md:flex md:mt-0 ${state ? '' : 'hidden'}`}>
                         <li className="order-2 pb-5 md:pb-0">
-                          {  <Link href="/auth/login" className="py-3 px-6 rounded-md shadow-md text-white text-center bg-black focus:shadow-none block md:inline">
+                          { user?.token != null ?<Link href={`/dashboard/${user?.userType}`} className="py-3 px-6 rounded-md shadow-md text-white text-center bg-black focus:shadow-none block md:inline">
+                                DashBoard
+                            </Link>: <Link href="/auth/login" className="py-3 px-6 rounded-md shadow-md text-white text-center bg-black focus:shadow-none block md:inline">
                                 Sign In
                             </Link>}
                         </li>
                         <div className="order-1 flex-1 justify-center items-center space-y-5 md:flex md:space-x-6 md:space-y-0">
                             {
                                 navigation.map((item, idx) => (
-                                    <li className="text-gray-500 hover:text-black" key={idx}>
+                                    <li className="text-white hover:text-black" key={idx}>
                                         <Link1 smooth duration={2000} className='cursor-pointer' to={item.path}>{item.title}</Link1>
                                     </li>
                                 ))
@@ -57,23 +62,8 @@ export const NavbarView= () => {
                     </ul>
                 </nav>
             </header>
-            <section className=" mx-auto h-[90vh] max-w-screen-xl flex flex-col justify-center items-center pb-4 px-4 sm:px-8">
-                <div className="text-center space-y-4">
-                    <h1 className="text-gray-800 font-bold text-4xl md:text-5xl">
-                        Optimize your website for
-                         <span className="text-black"> Search engine</span>
-                    </h1>
-                    <p className="text-gray-500 max-w-xl mx-auto leading-relaxed">
-                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum
-                    </p>
-                </div>
-                <div className="mt-12 justify-center items-center space-y-3 sm:space-x-6 sm:space-y-0 sm:flex">
-                    <Link href="/auth/login" className="px-10 py-3.5 w-full bg-black text-white text-center rounded-md shadow-md block sm:w-auto">
-                        Get started
-                    </Link>
-                
-                </div>
-            </section>
+<SparklesPreview/>
+
         </ div>
     )
 }

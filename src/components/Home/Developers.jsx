@@ -7,29 +7,38 @@ export const Developers= () => {
     const team = [
       
         {
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-            name: "Lysa sandiago",
+            avatar: "https://media.licdn.com/dms/image/D4D03AQFUHnGdTJC5hw/profile-displayphoto-shrink_800_800/0/1716127531824?e=1723075200&v=beta&t=8DR8fU20ocWl-dN9f1kWT-a1yHgcsuCjwh2wCLzDVQM",
+            name: "Sarthak Khare",
             title: "Head of designers",
-            desc: "Lorem Ipsum is simply dummy text of the printing and typesettin industry.",
-            linkedin: "",
+            desc: "Frontend & Backend Developer",
+            linkedin: "https://www.linkedin.com/in/sarthak-khare-898084253/",
             twitter: "",
             github: ""
         },
         {
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-            name: "Lysa sandiago",
+            avatar: "https://media.licdn.com/dms/image/D4D35AQGojFwVxeIRQA/profile-framedphoto-shrink_800_800/0/1714336166986?e=1718251200&v=beta&t=outcctWH83FD84xeksFp0OF5YZ5w-o3WZtQ5_WBAIIQ",
+            name: "Shreya Dwivedi",
             title: "Head of designers",
-            desc: "Lorem Ipsum is simply dummy text of the printing and typesettin industry.",
-            linkedin: "",
+            desc: "DataBase Architect ",
+            linkedin: "https://www.linkedin.com/in/shreya-dwivedi-494155223/",
             twitter: "",
             github: ""
         },
         {
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-            name: "Lysa sandiago",
+            avatar: "https://media.licdn.com/dms/image/D4D03AQHRY2XHRQ1Bkg/profile-displayphoto-shrink_800_800/0/1716998925288?e=1723075200&v=beta&t=Gvb3YCHhh50Ev6ZpTmYHhHhBDASAZf3mOOkLwKwdGxU",
+            name: "Dev Jadiya",
             title: "Head of designers",
-            desc: "Lorem Ipsum is simply dummy text of the printing and typesettin industry.",
-            linkedin: "",
+            desc: "Machine Learning & Assesment",
+            linkedin: "https://www.linkedin.com/in/devjadiya/",
+            twitter: "",
+            github: ""
+        },
+        {
+            avatar: "https://media.licdn.com/dms/image/C4D03AQHHYa0IPnTleQ/profile-displayphoto-shrink_800_800/0/1655957252585?e=1723075200&v=beta&t=4Q-FG2D7SoC0BTmbrd-SsVQ3V8UAf6g7hCM6DWhL2Uc",
+            name: "Aryan Parashar",
+            title: "Head of designers",
+            desc: "Cyber Security Analyst & VAPT",
+            linkedin: "https://www.linkedin.com/in/aryanparashar-sati/",
             twitter: "",
             github: ""
         },
@@ -41,14 +50,14 @@ export const Developers= () => {
             <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                 <div className="max-w-xl">
                     <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-                        Meet our team of Engineers, designers, and product managers.
+                        Meet our team of Machine Learning Engineers, designers, and DataBase managers.
                     </h3>
                     <p className="text-gray-600 mt-3">
                       
                     </p>
                 </div>
                 <div className="mt-12">
-                    <ul className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+                    <ul className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
                         {
                             team.map((item, idx) => (
                                 <li key={idx+1}>
