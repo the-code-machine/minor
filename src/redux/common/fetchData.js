@@ -94,6 +94,5 @@ export default function* rootSaga() {
     watchFetchProfileActions(),
     watchFetchTeamActions(),
     watchFetchProjectActions(),
-    // other sagas...
   ]);
 }
