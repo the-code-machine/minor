@@ -1,3 +1,4 @@
+'use client'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { login, logout, update } from './authSlicer';

@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import useAuth from "@/redux/common/useAuth";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 
 
 export default function RootLayout({ children }) {
